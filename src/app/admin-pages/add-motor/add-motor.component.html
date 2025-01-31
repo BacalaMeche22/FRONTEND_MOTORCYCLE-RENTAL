@@ -1,0 +1,83 @@
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-md shadow-md">
+    <h5 class="font-semibold mb-6">Add Motorcycle</h5>
+    <form [formGroup]="motorForm" (ngSubmit)="addMotor()" class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="plate-number" class="block font-medium">Plate Number</label>
+                    <input placeholder="Plate Number" type="text" formControlName="plate_no" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+
+                <div>
+                    <label for="model-name" class="block font-medium">Model Name</label>
+                    <input placeholder="Model name" formControlName="model" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <div>
+                    <label for="color" class="block font-medium">Color</label>
+                    <input placeholder="Color" formControlName="color" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+
+                <div>
+                    <label for="cubic-capacity" class="block font-medium">Cubic Capacity</label>
+                    <input placeholder="Cubic Capacity" type="text" formControlName="cubic_capacity" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label for="category" class="block font-medium">Select Category</label>
+            <select formControlName="category_id" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                <option value="">Select Category</option>
+                <option *ngFor="let category of allcategories" [value]="category.category_id">
+                    {{ category.category_name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="col-span-2">
+            <label for="price" class="block font-medium">Price/day</label>
+            <input type="text" formControlName="price" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+        </div>
+
+        <div class="col-span-2 flex items-center">
+            <input type="checkbox" formControlName="isVisible" class="mr-2">
+            <label for="status" class="font-medium">Status</label>
+            <span class="text-sm text-gray-500 ml-2">(checked - available, unchecked - not available)</span>
+        </div>
+
+        <div class="col-span-2">
+            <label for="description" class="block font-medium">Description</label>
+            <textarea formControlName="description" rows="3" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green"></textarea>
+        </div>
+
+        <div>
+            <label class="block font-medium">Extra Accessories</label>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label for="helmet-price" class="block font-medium">Helmet Price</label>
+                    <input type="text" formControlName="helmet_price" placeholder="₱000.00" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+
+                <div>
+                    <label for="extra-storage" class="block font-medium">Extra Storage</label>
+                    <input type="text" formControlName="storage_price" placeholder="₱000.00" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-7">
+            <label class="block font-medium">Upload Motorcycle Images</label>
+            <div class="flex items-center space-x-4">
+                <input type="file"  (change)="onFileSelected($event)" formControlName="motor_picture" class="border rounded-md px-2 py-1">
+            </div>
+        </div>
+
+        <div class="col-span-2 flex gap-4 mt-6">
+            <button type="button" (click)="close()" class="px-6 py-2 bg-blue text-black rounded-md hover:bg-gray">Back</button>
+            <button type="submit" class="px-6 py-2 bg-blue text-black rounded-md hover:bg-gray">Save</button>
+        </div>
+    </form>
+</div>

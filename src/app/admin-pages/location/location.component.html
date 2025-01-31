@@ -1,0 +1,11 @@
+<div class="coordinate-display flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full text-center border border-gray-200">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Motor Location Tracker</h2>
+      <div *ngIf="currentData" class="coordinate-info transition-opacity duration-500 ease-in-out">
+        <p class="text-lg font-medium text-gray-600"><span class="text-gray-800 font-semibold">SclId:</span> {{ currentData.SclId }}</p>
+        <p class="text-lg font-medium text-gray-600"><span class="text-gray-800 font-semibold">Latitude:</span> {{ currentData.latitude }}</p>
+        <p class="text-lg font-medium text-gray-600"><span class="text-gray-800 font-semibold">Longitude:</span> {{ currentData.longitude }}</p>
+      </div>
+    </div>
+  </div>
+  

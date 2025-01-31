@@ -1,0 +1,75 @@
+<div class="container mx-auto p-6 mt-14">
+  <h3 class="font-bold text-lg mb-4 border-b border-gray-300 pb-2">Approved Booking</h3>
+
+  <div class="grid grid-cols-3 gap-4">
+    <div class="flex items-center justify-center border border-gray">
+      <img [src]="bookingData.motor.motor_picture" alt="Motor Image" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="col-span-2 border-l border-gray-300 pl-4">
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <p><span class="font-bold">Booking ID:</span> {{ bookingData.booking_id }}</p>
+          <p><span class="font-bold">Item Name:</span> {{ bookingData.motor.motorCategory.category_name | titlecase }} {{ bookingData.motor.model| titlecase }} {{ bookingData.motor.cubic_capacity| titlecase }}</p>
+          <p><span class="font-bold">Start Date & Time:</span> {{ bookingData.pickup_date  |  date:'MMMM d, y h:mm a'   }}</p>
+          <p><span class="font-bold">Return Date & Time:</span> {{ bookingData.return_date |  date:'MMMM d, y h:mm a' }}</p>
+          <p><span class="font-bold">Rental Duration:</span> {{ bookingData.days }} days</p>
+        </div>
+
+        <div>
+          <p><span class="font-bold">Renter Name:</span> {{ bookingData.user.first_name }} {{ bookingData.user.last_name }}</p>
+          <p><span class="font-bold">Email:</span> {{ bookingData.user.email }}</p>
+          <p><span class="font-bold">Contact No.:</span> {{ bookingData.user.contact_no }}</p>
+          <p><span class="font-bold">Address:</span> {{ bookingData.user.address }}</p>
+          <p><span class="font-bold">Pickup Location:</span> Gusa, CDO</p>
+          <p><span class="font-bold">Return Location:</span> Gusa, CDO</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 border-t border-gray-300 pt-4">
+    <h3 class="font-bold text-base mb-2">Total Booking Summary</h3>
+    <div class="flex justify-between">
+      <span>₱{{bookingData.motor.price}}/day x {{ bookingData.days }} </span>
+      <span>₱{{ bookingData.motor.price * bookingData.days }}</span>
+  </div>
+  <div class="flex justify-between">
+      <span>Helmet</span>
+      <span class="text-green font-bold">Free</span> 
+  </div>
+  <div class="flex justify-between">
+      <span>Additional Helmet</span>
+      <span>₱{{ bookingData.free_helmet === 'true' ? 0 : 0 }}</span>
+  </div>
+  <div class="flex justify-between">
+      <span>Phone holder</span>
+      <span class="text-green font-bold">Free</span> 
+  </div>
+  <div class="flex justify-between">
+      <span>Extra Storage</span>
+      <span>₱{{ bookingData.extra_storage === 'true' ? 50 : 0 }}</span>
+  </div>
+  <div class="border-t pt-2 font-bold flex justify-between">
+      <span>Total amount:</span>
+      <span>₱{{ bookingData.total_amount }}</span>
+  </div>
+  </div>
+
+  <div class="flex justify-end gap-2 mt-6">
+    <button (click)="toggleViewBookingPage()" class="bg-blue text-black px-4 py-2 rounded hover:bg-gray-500">
+      BACK
+    </button>
+    <button class="bg-blue text-white px-4 py-2 rounded hover:bg-blue-600" (click)="approvedButton()">
+      <mat-spinner
+      *ngIf="isLoadingButton()"
+      diameter="20"
+      strokeWidth="4"
+      class=" custom-spinner"
+      color="accent"
+    />
+     <span *ngIf="!isLoadingButton()"> PROCEED TO RENT</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<body class="bg-gray-100 p-10">
+  <div class="fixed inset-0 flex items-center justify-center z-10">
+    <form
+      [formGroup]="accountform"
+      class="bg-white shadow-md rounded-lg p-6 w-10/12 h-5/6 overflow-auto"
+    >
+
+    <button class="text-xl font-bold text-red-500 hover:text-red-700" (click)="close()" style="float: right;">X</button>
+
+  
+      <mat-toolbar>
+        <h4 class="font-bold">USER INFORMATION</h4>
+      </mat-toolbar>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1 flex flex-col items-center">
+          <div class="w-40 h-40 bg-gray rounded-full flex items-center justify-center mb-4">
+            <img class="w-32 h-32" [src]="editdata?.user?.profile_pic" alt="" />
+          </div>
+
+          <div class="text-center">
+            <p class="text-lg font-semibold text-gray-700">
+              {{ editdata?.user?.first_name }} {{ editdata?.user?.last_name }}
+            </p>
+            <p class="text-sm text-gray-500">{{ editdata?.user?.contact_no }}</p>
+          </div>
+        </div>
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700 mt-4">Address</label>
+          <input
+            formControlName="address"
+            class="w-full border border-gray-300 rounded-md p-2 mt-1"
+            placeholder="Zone 2, CDOC"
+          />
+
+          <label class="block text-sm font-medium text-gray-700 mt-4">Email</label>
+          <input
+            formControlName="email"
+            class="w-full border border-gray-300 rounded-md p-2 mt-1"
+            placeholder="mech@gmail.com"
+          />
+
+          <label class="block text-sm font-medium text-gray-700 mt-4">Birthdate</label>
+          <input
+            formControlName="birthdate"
+            class="w-full border border-gray-300 rounded-md p-2 mt-1"
+            placeholder="Birthdate"
+          />
+        </div>
+      </div>
+
+      <mat-toolbar>
+        <h4 class="font-bold">DOCUMENTS</h4>
+      </mat-toolbar>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">License no.</label>
+          <input
+            formControlName="license_no"
+            class="w-full border border-gray-300 rounded-md p-2 mt-1"
+            placeholder="KA5365540PLS"
+          />
+        </div>
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">Support ID no.</label>
+          <input
+            formControlName="other_id_no"
+            class="w-full border border-gray-300 rounded-md p-2 mt-1"
+            placeholder="938437563788"
+          />
+        </div>
+
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">License ID Front Image</label>
+          <div class="w-full h-5/5 border rounded-md flex items-center justify-center mt-1">
+            <img
+              [src]="editdata?.user?.license_front"
+              alt="License Front"
+              class="w-full h-5/5 object-cover border rounded-md"
+              (click)="openFullView(editdata?.user?.license_front)"
+            />
+          </div>
+        </div>
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700">License ID Back Image</label>
+          <div class="w-full h-5/5 border border-gray-300 rounded-md flex items-center justify-center mt-1">
+            <img
+              [src]="editdata?.user?.license_back"
+              alt="License Back"
+              class="w-full h-5/5 object-cover border rounded-md"
+              (click)="openFullView(editdata?.user?.license_back)"
+            />
+          </div>
+        </div>
+    
+      </div>
+
+      <div class="col-span-2 flex justify-end mt-4">
+        <button
+        type="button"
+       (click)="updateRole()"
+        class="px-4 py-2 bg-blue text-white rounded-md hover:bg-gray mr-5"
+      >
+        Make Admin
+      </button>
+
+        <button
+        (click)="approvedButton()"
+          type="button"
+          class="px-4 py-2 bg-blue text-white rounded-md hover:bg-gray"
+        >
+        <mat-spinner
+            *ngIf="isLoadingButton()"
+            diameter="20"
+            strokeWidth="4"
+            class=" custom-spinner"
+            color="accent"
+          />
+          <span *ngIf="!isLoadingButton()">Verify</span>
+          
+        </button>
+      </div>
+    </form>
+  </div>
+</body>

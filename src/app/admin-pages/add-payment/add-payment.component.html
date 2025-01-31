@@ -1,0 +1,61 @@
+<div class="p-6 w-full max-w-md bg-white rounded-lg shadow-md">
+  <h2 class="text-xl font-bold mb-4 text-center">ADD PAYMENT</h2>
+
+  <form [formGroup]="paymentForm">
+    <div class="mb-4">
+      <label for="total_amount" class="block text-sm font-medium text-gray-700">Payment Amount</label>
+      <input
+        type="number"
+        id="total_amount"
+        formControlName="total_amount"
+        class="mt-1 p-2 block w-full border rounded-md focus:ring focus:ring-blue-500"
+        placeholder="₱ 0.00"
+        [disabled]="true"
+      />
+    </div>
+
+
+      <div class="mb-4">
+        <label for="payment_method" class="block text-sm font-medium text-gray-700">Payment Method</label>
+        <input
+          type="text"
+          id="payment_method"
+          formControlName="payment_method"
+          class="mt-1 p-2 block w-full border rounded-md focus:ring focus:ring-blue-500"
+          [disabled]="true"
+        />
+      </div>
+      <div *ngIf="paymentForm.get('payment_method')?.invalid && paymentForm.get('payment_method')?.touched" class="text-red-500 text-sm">
+        Payment method is required.
+      </div>
+
+    <div class="mb-4">
+      <label for="date_of_payment" class="block text-sm font-medium text-gray-700">Date of Payment</label>
+      <input
+        type="date"
+        id="date_of_payment"
+        formControlName="date_of_payment"
+        class="mt-1 p-2 block w-full border rounded-md focus:ring focus:ring-blue-500"
+        [value]="currentDate"
+        [disabled]="true"
+      />
+    </div>
+
+    <div class="flex justify-between mt-6">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="bg-gray hover:bg-gray-400 text-black font-medium px-4 py-2 rounded"
+      >
+        Cancel
+      </button>
+
+      <button
+        (click)="submitPayment()"
+        class="bg-blue hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
+      >
+        Pay In Total
+      </button>
+    </div>
+  </form>
+</div>

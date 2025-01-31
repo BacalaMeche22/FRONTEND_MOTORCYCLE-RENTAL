@@ -1,0 +1,38 @@
+<div class="p-6 bg-white rounded shadow-md">
+    <form [formGroup]="blocklistForm" (ngSubmit)="onSubmit()">
+      <label for="user_id" class="block mb-2 text-sm font-medium text-gray-700">Select User</label>
+      <select
+        id="user_id"
+        formControlName="user_id"
+        class="block w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+        required
+      >
+        <option value="" disabled>Select user</option>
+        <option *ngFor="let user of users" [value]="user.user_id">
+          {{ user.first_name }} {{ user.last_name }}
+        </option>
+      </select>
+  
+      <label for="message" class="block mt-4 mb-2 text-sm font-medium text-gray-700">Message</label>
+      <input
+        type="text"
+        id="message"
+        formControlName="message"
+        class="block w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+        required
+      />
+  
+      <input
+        type="hidden"
+        formControlName="block_status"
+      />
+  
+      <button
+        type="submit"
+        class="mt-6 px-4 py-2 text-white bg-blue rounded-lg hover:bg-gray focus:outline-none"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  

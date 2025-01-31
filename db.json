@@ -1,0 +1,108 @@
+{
+  "registrationForm": {
+    "fields": {
+      "personalInformation": {
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "password": "",
+        "phoneNumber": "",
+        "completeAddress": "",
+        "birthday": "",
+        "gender": {
+          "options": [
+            "Female",
+            "Male",
+            "Custom"
+          ],
+          "selected": ""
+        }
+      },
+      "drivingLicense": {
+        "licenseNumber": "",
+        "frontImage": "file-upload-url",
+        "backImage": "file-upload-url"
+      },
+      "otherIdProof": {
+        "type": {
+          "options": [
+            "National ID",
+            "Voter ID",
+            "Student ID",
+            "Passport"
+          ],
+          "selected": ""
+        },
+        "idNumber": ""
+      }
+    }
+  },
+  "userData": [
+    {
+      "id": "7eb9",
+      "personalInformation": {
+        "firstName": "Jerick",
+        "lastName": "Signapand",
+        "email": "ric@gmail.com",
+        "phoneNumber": "9650855778",
+        "password": "123",
+        "completeAddress": "purok 18 lower dayawan villanueva",
+        "birthday": "2011-06-15",
+        "gender": "female"
+      },
+      "drivingLicense": {
+        "licenseNumber": "342sdr3243254",
+        "frontImage": "Motorcycle_Renter (1).pdf",
+        "backImage": "Motorcycle RENTAL ADMIN (2).pdf"
+      },
+      "otherIdProof": {
+        "type": "2321sdsadsa",
+        "idNumber": "12321sadsadsa"
+      }
+    },
+    {
+      "id": "4ed4",
+      "personalInformation": {
+        "firstName": "mech",
+        "lastName": "gwapa",
+        "email": "mech@gmail.con",
+        "phoneNumber": "09650855778",
+        "password": "1234",
+        "completeAddress": "purok 18 lower dayawan villanueva",
+        "birthday": "2010-07-08",
+        "gender": "female"
+      },
+      "drivingLicense": {
+        "licenseNumber": "342sdr3243254",
+        "frontImage": "make a logo for 0c165bf9-97e5-4187-843e-0858aa7a2168.png",
+        "backImage": "306592150_646975483479194_5646541403869773747_n.jpg"
+      },
+      "otherIdProof": {
+        "type": "2321sdsadsa",
+        "idNumber": "12321sadsadsa"
+      }
+    },
+    {
+      "id": "bf8e",
+      "personalInformation": {
+        "firstName": "mechelou",
+        "lastName": "bacala",
+        "email": "mechelousabaybacala@gmail.com",
+        "phoneNumber": "09638913583",
+        "password": "12345",
+        "completeAddress": "jasaan, misamis oriental",
+        "birthday": "2024-05-05",
+        "gender": "female"
+      },
+      "drivingLicense": {
+        "licenseNumber": "dsadsadsadsa",
+        "frontImage": "Screenshot 2024-08-27 222843.png",
+        "backImage": "Screenshot 2024-08-27 233136.png"
+      },
+      "otherIdProof": {
+        "type": "yyw5542",
+        "idNumber": "67321"
+      }
+    }
+  ]
+}

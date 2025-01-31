@@ -1,0 +1,50 @@
+
+<div class="fixed inset-0 z-50 bg-gray-dark bg-opacity-100 flex items-center justify-center">
+  <div class="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6 relative">
+    <div class="flex justify-between items-center border-b pb-4">
+      <h5 class="font-bold">RENTAL RECEIPT</h5>
+      <button class="text-red-500 font-bold hover:text-red-700" (click)="closeDialog()">X</button>
+    </div>
+
+  
+    <div>
+      
+      <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+        <div>
+          <p><span class="font-bold">Booking ID:</span> {{ data.bookingDetails.booking_id }}</p>
+          <p><span class="font-bold">Motorcycle:</span> {{ data.bookingDetails.motor?.model }} - {{ data.bookingDetails.motor?.color }}</p>
+          <p><span class="font-bold">Plate Number:</span> {{ data.bookingDetails.motor?.plate_no }}</p>
+          <p><span class="font-bold">Renter Name:</span> {{ data.bookingDetails.user?.first_name }} {{ data.bookingDetails.user?.last_name }}</p>
+          <p><span class="font-bold">Contact no:</span> {{ data.bookingDetails.user?.contact_no || 'N/A' }}</p>
+          <p><span class="font-bold">Email:</span> {{ data.bookingDetails.user?.email }}</p>
+          <p><span class="font-bold">Address:</span> {{ data.bookingDetails.user?.address || 'N/A' }}</p>
+        </div>
+        <div>
+          <p><span class="font-bold">Booking Request:</span> {{ data.bookingDetails.created_at | date: 'short' }}</p>
+          <p><span class="font-bold">Start Date:</span> {{ data.bookingDetails.pickup_date | date: 'short' }}</p>
+          <p><span class="font-bold">End Date:</span> {{ data.bookingDetails.return_date | date: 'short' }}</p>
+          <p><span class="font-bold">Payment Option:</span> {{ data.bookingDetails.payment_method }}</p>
+          <p><span class="font-bold">Payment Status:</span> {{ data.bookingDetails.paid_status }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="font-bold border-b pb-2">RENTAL SUMMARY</h5>
+        <div class="grid grid-cols-2 gap-4 text-sm mt-2">
+          <p><span class="font-bold">Days:</span> {{ data.bookingDetails.days }}</p>
+          <p><span class="font-bold">Motorcycle Rent Price:</span> &#8369;{{ data.bookingDetails.motor?.price }}</p>
+          <p><span class="font-bold text-green-600">Free Helmet:</span> {{ data.bookingDetails.free_helmet ? 'FREE' : '' }}</p>
+          <p><span class="font-bold text-green-600">Phone Holder:</span> {{ data.bookingDetails.phone_holder ? 'FREE' : '' }}</p>        
+          <p class="col-span-2">
+            <span class="font-bold">TOTAL AMOUNT:</span> &#8369;{{ data.bookingDetails.total_amount }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-4 mt-6">
+        <button class="bg-blue text-white px-4 py-2 rounded hover:bg-gray" (click)="printReceipt()">PRINT</button>
+        <button class="bg-blue text-white px-4 py-2 rounded hover:bg-gray" (click)="viewPDF()">VIEW PDF</button>
+      </div>
+    </div>
+  </div>
+</div>

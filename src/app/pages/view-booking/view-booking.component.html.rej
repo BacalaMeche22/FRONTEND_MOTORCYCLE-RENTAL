@@ -1,0 +1,9 @@
+diff a/src/app/pages/view-booking/view-booking.component.html b/src/app/pages/view-booking/view-booking.component.html	(rejected hunks)
+@@ -57,7 +57,6 @@
+       </div>
+ 
+       <div class="border p-4 rounded-lg space-y-2 text-sm">
+-        </div>
+         <div class="space-y-2 text-sm">
+           <div class="flex justify-between">
+             <span>Pick-up Date:</span>

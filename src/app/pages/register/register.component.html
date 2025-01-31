@@ -1,0 +1,197 @@
+<div class="p-10">
+  <div class="one bg-gray text-white p-3 rounded-t-lg">
+    <h1 class="text-3xl">Register Account</h1>
+  </div>
+
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+      <form [formGroup]="firstFormGroup" class="form-1 mt-7 pt-10">
+        <ng-template matStepLabel>Account</ng-template>
+
+        <div class="example-container">
+          <mat-form-field class="equal-width">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="pat@example.com"
+              formControlName="email"
+              (blur)="updateErrorMessage()"
+              required
+            />
+            @if (email.invalid) {
+            <mat-error>{{ errorMessage() }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="equal-width">
+          <mat-label>Enter your password</mat-label>
+
+          <input
+            matInput
+            [type]="hide() ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div>
+          <button class="px-8 py-2 bg-blue rounded-lg  text-white " matStepperNext>
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <div class="mt-10"></div>
+
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <form [formGroup]="secondFormGroup" class="form-2 pt-10">
+        <ng-template matStepLabel>Personal Information</ng-template>
+
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="first_name" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="last_name" required />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Contact No.</mat-label>
+          <span matTextPrefix></span>
+          <input
+            type="text"
+            formControlName="contact_no"
+            matInput
+            placeholder="912-3456-789"
+          />
+          <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Complete Address</mat-label>
+          <input matInput formControlName="address" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Birthdate</mat-label>
+          <input
+            matInput
+            formControlName="birthdate"
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            startView="year"
+            [startAt]="startDate"
+          ></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="one">Male</mat-option>
+            <mat-option value="two">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex gap-2">
+          <button class="px-8 py-2 bg-blue rounded-lg  text-white" matStepperPrevious>
+            Back
+          </button>
+          <button class="px-8 py-2 bg-blue rounded-lg  text-white" matStepperNext>
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+      <ng-template matStepLabel>ID's</ng-template>
+      <form [formGroup]="thirdFormGroup" class="form-3 pt-10">
+        <ng-template matStepLabel>Personal Information</ng-template>
+
+        <div class="form-group">
+          <label for="drivingLicenseFront">Driving License Front Image:</label>
+          <input
+            type="file"
+            id="drivingLicenseFront"
+            (change)="onLicenseFrontSelected($event)"
+            formControlName="license_front"
+            class="file-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="drivingLicenseBack">Driving License Back Image:</label>
+          <input
+            type="file"
+            id="drivingLicenseBack"
+            (change)="onLicenseBackSelected($event)"
+            formControlName="license_back"
+
+            class="file-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="otherIdImage">Other Valid ID Proof:</label>
+          <input
+            type="file"
+            id="otherIdImage"
+            (change)="onOtherIdSelected($event)"
+            formControlName="other_id"
+
+            class="file-input"
+          />
+        </div>
+
+        <mat-form-field>
+          <mat-label>Driving License Number:</mat-label>
+          <input matInput formControlName="license_no" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Other Valid ID Proof Number:</mat-label>
+          <input matInput formControlName="other_id_no" required />
+        </mat-form-field>
+
+        <div class="button-group flex gap-2">
+          <button
+            class="px-8 py-2 bg-blue hover:bg-gray  text-white hover:text-white rounded-lg"
+            matStepperPrevious
+          >
+            Back
+          </button>
+          <button
+            class="px-8 py-2 bg-blue hover:bg-gray hover:text-white text-white rounded-lg"
+            (click)="onSubmit()"
+          >
+          <mat-spinner
+          *ngIf="isLoadingButton()"
+          diameter="20"
+          strokeWidth="4"
+          class=" custom-spinner"
+          color="accent"
+        />
+            <span *ngIf="!isLoadingButton()">Submit All</span>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

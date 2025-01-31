@@ -1,0 +1,13 @@
+.mat-calendar-body-cell.mat-calendar-body-disabled {
+  background-color: red !important;
+  color: white !important;
+}
+
+.disabled-date-input {
+  background-color: red !important;
+  color: white !important;
+  border: 2px solid darkred !important;
+}
+.disabled-date {
+  color: red !important;
+}

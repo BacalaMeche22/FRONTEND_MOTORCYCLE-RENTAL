@@ -1,0 +1,15 @@
+img {
+  border-radius: 0.5rem;
+}
+
+.text-stroke {
+  color: white;
+}
+
+.text-stroke p {
+  text-shadow:
+    2px 2px 0px rgba(0, 0, 0, 0.7),
+    -2px -2px 0px rgba(0, 0, 0, 0.7),
+    2px -2px 0px rgba(0, 0, 0, 0.7),
+    -2px 2px 0px rgba(0, 0, 0, 0.7);
+}

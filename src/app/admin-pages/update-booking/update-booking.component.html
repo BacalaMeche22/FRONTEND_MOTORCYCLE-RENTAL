@@ -1,0 +1,142 @@
+<body class="bg-gray-100 p-10">
+  <div
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white shadow-md rounded-lg p-6 w-10/12 h-5/6 overflow-auto">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-semibold">Booking Details</h2>
+
+       
+        <button class="text-xl font-bold text-red-500 hover:text-red-700" (click)="close()" style="float: right;">X</button>
+     
+      </div>
+
+      <div class="border-b mb-2"></div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div>
+          <p>
+            <strong>Renter Name:</strong>
+            {{ selectedBooking?.user?.first_name }}
+            {{ selectedBooking?.user?.last_name }}
+          </p>
+          <p>
+            <strong>Contact no.:</strong>
+            {{ selectedBooking?.user?.contact_no }}
+          </p>
+          <p><strong>Booking ID:</strong> {{ selectedBooking?.booking_id }}</p>
+          <p>
+            <strong>Pick-up Date:</strong>
+            {{ selectedBooking?.pickup_date | date : "MMMM d, yyyy h:mm a" }}
+          </p>
+          <p>
+            <strong>Payment Mode:</strong> {{ selectedBooking?.payment_method }}
+          </p>
+          <p>
+            <strong>Payment Status:</strong> {{ selectedBooking?.paid_status }}
+          </p>
+        </div>
+        <div>
+          <p><strong>Email:</strong> {{ selectedBooking?.user?.email }}</p>
+          <p><strong>Address:</strong> {{ selectedBooking?.user?.address }}</p>
+          <p>
+            <strong>Booked on:</strong>
+            {{ selectedBooking?.created_at | date : "MMMM d, yyyy" }}
+          </p>
+          <p>
+            <strong>End Date:</strong>
+            {{ selectedBooking?.pickup_date | date : "MMMM d, yyyy h:mm a" }}
+          </p>
+          <p>
+            <strong>Return Status:</strong> {{ selectedBooking?.return_status }}
+          </p>
+          <p>
+            <strong>Booking Status:</strong>
+            {{ selectedBooking?.booking_status }}
+          </p>
+          <p>
+            <strong>Reference Number:</strong>
+            {{ selectedBooking?.reference_link }}
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-xl font-semibold mb-4 border-b pb-2">
+        Total Booking Summary
+      </h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span
+            >₱{{ selectedBooking?.motor.price }}/day x
+            {{ selectedBooking?.days }} day{{
+              selectedBooking?.days !== 1 ? "s" : ""
+            }}</span
+          >
+          <span>₱{{ selectedBooking?.total_amount }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Helmet</span>
+          <span class="text-green font-bold">Free</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Additional Helmet</span>
+          <span
+            >₱{{
+              !selectedBooking?.free_helmet
+                ? selectedBooking?.motor.helmet_price * selectedBooking?.days
+                : 0
+            }}</span
+          >
+        </div>
+        <div class="flex justify-between">
+          <span>Phone holder</span>
+          <span class="text-green font-bold">Free</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Extra Storage</span>
+          <span
+            >₱{{
+              !selectedBooking?.extra_storage
+                ? selectedBooking?.motor.storage_price * selectedBooking?.days
+                : 0
+            }}</span
+          >
+        </div>
+
+        <div class="border-t pt-2 font-bold flex justify-between">
+          <span>Total price:</span>
+          <span>₱{{ selectedBooking?.total_amount }}</span>
+        </div>
+      </div>
+
+      <div class="flex gap-3 mt-5 justify-end">
+        <button
+        (click)="declinedButton()"
+
+          class="px-6 py-2 bg-blue text-white rounded hover:bg-blue transition"
+        >
+        <mat-spinner
+        *ngIf="isLoadingButton()"
+        diameter="20"
+        strokeWidth="4"
+        class="custom-spinner"
+        color="accent"
+      />
+      <span *ngIf="!isLoadingButton()">Decline</span>
+        </button>
+        <button
+          class="px-6 py-2 bg-blue text-white rounded hover:bg-blue transition"
+          (click)="approvedButton()"
+        >
+          <mat-spinner
+            *ngIf="isLoadingButton()"
+            diameter="20"
+            strokeWidth="4"
+            class="custom-spinner"
+            color="accent"
+          />
+          <span *ngIf="!isLoadingButton()">Approved</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,29 @@
+/* Ensures the table and paginator remain scrollable on small screens */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+th {
+  background-color: #f3f4f6;
+  font-weight: bold;
+  color: #374151;
+}
+
+tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+tr:hover {
+  background-color: #e5e7eb;
+}
+
+.mat-paginator {
+  flex-wrap: wrap;
+}

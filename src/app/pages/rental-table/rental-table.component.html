@@ -1,0 +1,71 @@
+<h4 class="px-14 pt-20">Rental History</h4>
+
+<div class="mat-elevation-z8 mx-14 mb-4">
+  <table mat-table [dataSource]="allbooking" class="mat-elevation-z8">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let booking; let i = index"> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="model_name">
+      <th mat-header-cell *matHeaderCellDef> Model Name </th>
+      <td mat-cell *matCellDef="let booking"> {{ booking.motor.model  }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category_name">
+      <th mat-header-cell *matHeaderCellDef> Category Name </th>
+      <td mat-cell *matCellDef="let booking"> {{ booking.motor.motorCategory.category_name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="start_Date">
+      <th mat-header-cell *matHeaderCellDef> Rent Date & Time  </th>
+      <td mat-cell *matCellDef="let booking"> {{ booking.pickup_date  |  date:'MMMM d, y h:mm a'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="end_Date">
+      <th mat-header-cell *matHeaderCellDef> Return Date & Time  </th>
+      <td mat-cell *matCellDef="let booking"> {{ booking.return_date  |  date:'MMMM d, y h:mm a' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total_amount">
+      <th mat-header-cell *matHeaderCellDef>Total Amount  </th>
+      <td mat-cell *matCellDef="let booking"> ₱ {{ booking.total_amount}}.00</td>
+    </ng-container>
+
+    <ng-container matColumnDef="return_status">
+      <th mat-header-cell *matHeaderCellDef>Return Status</th>
+      <td mat-cell *matCellDef="let booking"> {{ booking.return_status}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef>Paid Status</th>
+      <td mat-cell *matCellDef="let booking" [ngClass]="{
+        'text-red font-semibold': booking.paid_status === 'UNPAID',
+        'text-green font-semibold': booking.paid_status === 'PAID',
+      }"> {{ booking.paid_status}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let booking">
+        <button
+        (click)="viewBooking(booking)"
+          class="font-medium text-blue cursor-pointer"
+          matTooltip="View"
+          aria-label="View"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of bookings"
+  ></mat-paginator>
+</div>

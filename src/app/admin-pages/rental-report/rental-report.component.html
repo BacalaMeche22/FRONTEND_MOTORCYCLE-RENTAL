@@ -1,0 +1,89 @@
+<div class="p-4 bg-white shadow rounded-lg">
+  <div class="flex items-center space-x-2 mb-4">
+    <div class="flex flex-col items-center text-sm">
+      <label class="font-semibold">Report From</label>
+      <input type="date" [(ngModel)]="reportFrom" class="border p-1 rounded text-center text-sm" />
+    </div>
+
+    <div class="flex flex-col items-center text-sm">
+      <label class="font-semibold">Report To</label>
+      <input type="date" [(ngModel)]="reportTo" class="border p-1 rounded text-center text-sm" />
+    </div>
+
+    <div class="flex flex-col items-center text-sm">
+      <label class="font-semibold">Return Status</label>
+      <select [(ngModel)]="returnStatusFilter" (change)="filterByReturnStatus()" class="border p-1 rounded text-sm">
+        <option value="">All</option>
+        <option value="Returned">Returned</option>
+        <option value="Not Returned">Not Returned</option>
+      </select>
+    </div>
+
+    <!-- User filter dropdown -->
+    <div class="flex flex-col items-center text-sm">
+      <label class="font-semibold">Select User</label>
+      <select [(ngModel)]="selectedUser" (change)="generateReport()" class="border p-1 rounded text-sm">
+        <option value="">All Users</option>
+        <option *ngFor="let user of users" [value]="user">{{ user }}</option>
+      </select>
+    </div>
+
+    <button (click)="generateReport()" class="bg-blue text-white px-3 py-1 mt-6 rounded font-semibold text-sm hover:text-black hover:bg-gray">
+      Generate Report
+    </button>
+
+    <div class="flex space-x-2 justify-center mt-6">
+      <button (click)="exportToPDF()" class="bg-blue text-white px-3 py-1 rounded font-semibold text-sm hover:bg-gray">
+        View as PDF
+      </button>
+      <button (click)="printPDF()" class="bg-blue text-white px-3 py-1 rounded font-semibold text-sm hover:bg-gray">
+        Print
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isReportGenerated" class="overflow-x-auto mt-4">
+    <ng-container *ngIf="filteredData.length > 0; else noRecords">
+      <table class="min-w-full bg-white shadow-md rounded-lg text-sm">
+        <thead>
+          <tr class="bg-blue text-white text-left">
+            <th class="p-1 text-left font-semibold min-w-[150px] border-b">Booking Date</th>
+            <th class="p-1 text-left font-semibold min-w-[150px] border-b">Renter Name</th>
+            <th class="p-1 text-left font-semibold min-w-[120px] border-b">Contact No</th>
+            <th class="p-1 text-left font-semibold min-w-[90px] border-b">Plate No.</th>
+            <th class="p-1 text-left font-semibold min-w-[140px] border-b">Motorcycle Name</th>
+            <th class="p-1 text-left font-semibold min-w-[50px] border-b">Days</th>
+            <th class="p-1 text-left font-semibold min-w-[100px] border-b">Pickup Date</th>
+            <th class="p-1 text-left font-semibold min-w-[100px] border-b">Return Date</th>
+            <th class="p-1 text-left font-semibold min-w-[100px] border-b">Payment Method</th>
+            <th class="p-1 text-left font-semibold min-w-[100px] border-b">Paid Status</th>
+            <th class="p-1 text-left font-semibold min-w-[100px] border-b">Total Amount</th>
+            <th class="p-1 text-left font-semibold min-w-[80px] border-b">Return Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of filteredData" class="border-t border-b">
+            <td class="p-1">{{ booking.created_at | date: 'MMMM d, yyyy, h:mm a' }}</td>
+            <td class="p-1">{{ booking.user.first_name }} {{ booking.user.last_name }}</td>
+            <td class="p-1">{{ booking.user.contact_no }}</td>
+            <td class="p-1">{{ booking.motor.plate_no }}</td>
+            <td class="p-1">{{ booking.motor.motorCategory.category_name }} {{booking.motor.model}} {{booking.motor.cubic_capacity}}</td>
+            <td class="p-1">{{ booking.days }}</td>
+            <td class="p-1">{{ booking.pickup_date | date: 'MMMM d, yyyy' }}</td>
+            <td class="p-1">{{ booking.return_date | date: 'MMMM d, yyyy' }}</td>
+            <td class="p-1">{{ booking.payment_method }}</td>
+            <td class="p-1">{{ booking.paid_status }}</td>
+            <td class="p-1">{{ booking.total_amount | currency: 'PHP' }}</td>
+            <td class="p-1">{{ booking.return_status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #noRecords>
+      <div class="text-center text-blue font-semibold mt-4">
+        No records found for the selected filters.
+      </div>
+    </ng-template>
+  </div>
+</div>

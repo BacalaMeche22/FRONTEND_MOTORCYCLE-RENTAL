@@ -1,0 +1,50 @@
+table {
+    width: 100%;
+    border-collapse: collapse; 
+  }
+  
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+
+  td, th {
+    width: 25%;
+    padding: 12px 8px; 
+    text-align: left; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+  
+  table, td, th {
+    border: 1px solid #e5e7eb; 
+  }
+  
+  th {
+    background-color: #f3f4f6;
+    font-weight: bold;
+    color: #374151;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9fafb; 
+  }
+  
+  tr:hover {
+    background-color: #e5e7eb;
+    cursor: pointer;
+  }
+  .text-green-500 {
+    color: #22c55e; 
+    font-weight: bold;
+  }
+  
+  .text-red-500 {
+    color: #ef4444; 
+    font-weight: bold;
+  }
+  
+  

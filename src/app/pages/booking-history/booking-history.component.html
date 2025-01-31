@@ -1,0 +1,80 @@
+<h4 class="px-4 md:px-14 pt-10 md:pt-25 text-lg md:text-2xl font-bold">Booking History</h4>
+
+<div class="mat-elevation-z8 mx-4 md:mx-14 mb-4 overflow-x-auto">
+  <!-- Responsive Table -->
+  <table mat-table [dataSource]="allbooking" class="mat-elevation-z8 w-full min-w-[600px]">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let booking; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category_name">
+      <th mat-header-cell *matHeaderCellDef>Category Name</th>
+      <td mat-cell *matCellDef="let booking">
+        {{ booking.motor.motorCategory.category_name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plate_no">
+      <th mat-header-cell *matHeaderCellDef>Plate No</th>
+      <td mat-cell *matCellDef="let booking">{{ booking.motor.plate_no }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="motor_model">
+      <th mat-header-cell *matHeaderCellDef>Motorcycle Name</th>
+      <td mat-cell *matCellDef="let booking">{{ booking.motor.model }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="start_date">
+      <th mat-header-cell *matHeaderCellDef>Start Date & Time</th>
+      <td mat-cell *matCellDef="let booking">
+        {{ booking.pickup_date | date : "MMMM d, y h:mm a" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef>End Date & Time</th>
+      <td mat-cell *matCellDef="let booking">
+        {{ booking.return_date | date : "MMMM d, y h:mm a" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="booking_date">
+      <th mat-header-cell *matHeaderCellDef>Request</th>
+      <td mat-cell *matCellDef="let booking">
+        {{ booking.created_at | date : "MMMM d, y h:mm a" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="booking_status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let booking" [ngClass]="{
+          'text-red': booking.booking_status === 'Cancel',
+          'text-red font-bold': booking.booking_status === 'Declined',
+          'text-blue font-bold': booking.booking_status === 'Pending'
+        }">
+        {{ booking.booking_status }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let booking">
+        <button (click)="viewBooking(booking)" class="font-medium text-blue-600 cursor-pointer" matTooltip="View"
+          aria-label="View">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<!-- Responsive Paginator -->
+<div class="w-full flex justify-end overflow-x-auto px-4 md:px-14">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of bookings" class="w-full md:w-auto">
+  </mat-paginator>
+</div>

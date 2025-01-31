@@ -1,0 +1,200 @@
+<header class="bg-gray-light fixed top-0 left-0 w-full z-50">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <div class="flex lg:flex-1">
+      <div class="flex items-center space-x-2">
+        <img class="h-8 w-auto"
+          src="https://firebasestorage.googleapis.com/v0/b/motorcycle-rental-f63ac.appspot.com/o/small-logs.png?alt=media&token=685ce284-ecee-472a-811c-4c6b4edbd7fa"
+          alt="Logo">
+        <span class="text-lg font-semibold text-black">Motorcycle Rental</span>
+      </div>
+    </div>
+
+    <div class="flex lg:hidden">
+      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+        (click)="toggleMenu()">
+        <span class="sr-only">Open main menu</span>
+        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="hidden lg:flex lg:gap-x-12">
+      <a class="mr-5 text-blue">
+        <button (click)="scrollToSection('home-section')"
+          class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+          [ngClass]="{ 'bg-blue text-white': activeSection === 'home-section' }">
+          Home
+        </button>
+      </a>
+      <div class="relative group">
+        <button
+          class="inline-flex items-center text-blue border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base">
+          Categories
+        </button>
+        <div class="absolute left-0 hidden group-hover:block bg-blue text-black w-48 shadow-lg rounded-md">
+          <ng-container *ngFor="let category of allcategories">
+            <a class="block px-4 py-2 text-white hover:bg-white hover:text-blue cursor-pointer"
+              (click)="scrollToCategory(category)">
+              {{ category.category_name }}
+            </a>
+          </ng-container>
+        </div>
+      </div>
+      <a class="mr-5 text-blue">
+        <button (click)="scrollToSection('about-section')"
+          class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+          [ngClass]="{ 'bg-blue text-white': activeSection === 'about-section' }">
+          About
+        </button>
+      </a>
+      <a class=" text-blue">
+        <button (click)="scrollToSection('contact-section')"
+          class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+          [ngClass]="{ 'bg-blue text-white': activeSection === 'contact-section' }">
+          Contact
+        </button>
+      </a>
+    </div>
+
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-6">
+      <ng-container *ngIf="userInfo?.role !== 'renter'; else renterContent">
+        <button
+          class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-white bg-blue"
+          routerLink="/login">
+          Login
+        </button>
+        <button
+          class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-white bg-blue"
+          routerLink="/termcondition">
+          Register
+        </button>
+      </ng-container>
+
+      <ng-template #renterContent>
+        <div class="flex items-center space-x-4 relative group">
+          <img class="w-10 h-10 rounded-full object-cover ring-2 ring-gray dark:ring-gray flex-nowrap cursor-pointer"
+            [src]="userInfo?.profile_pic" alt="User avatar" />
+          <span class="text-blue font-medium text-sm">
+            {{ userInfo?.first_name }} {{ userInfo?.last_name }}
+          </span>
+          <div
+            class="absolute -left-3 top-10 hidden group-hover:block z-10 w-56 origin-top-left rounded-md bg-blue text-white shadow-lg"
+            role="menu" aria-orientation="vertical">
+            <div role="none">
+              <a (click)="openUpdateUserModal(user)"
+                class="block px-4 py-2 text-sm hover:bg-white hover:text-blue cursor-pointer">
+                Account settings
+              </a>
+              <a (click)="toggleViewBookingPage()"
+                class="block px-4 py-2 text-sm cursor-pointer hover:bg-white hover:text-blue">
+                Booking History
+              </a>
+              <a (click)="logout()" class="block px-4 py-2 text-sm hover:bg-white hover:text-blue cursor-pointer">
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </nav>
+
+  <div class="lg:hidden" role="dialog" [class.hidden]="isMenuOpen" aria-modal="true">
+    <div class="fixed inset-0 z-10"></div>
+    <div
+      class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <img class="h-8 w-auto"
+            src="https://firebasestorage.googleapis.com/v0/b/motorcycle-rental-f63ac.appspot.com/o/small-logs.png?alt=media&token=685ce284-ecee-472a-811c-4c6b4edbd7fa"
+            alt="Logo">
+          <em class="text-lg font-semibold text-gray-800">Motorcycle Rental</em>
+        </div>
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" (click)="toggleMenu()">
+          <span class="sr-only">Close menu</span>
+          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="mt-6 flow-root ">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6 flex flex-col">
+            <a class="mr-5 text-blue">
+              <button (click)="scrollToSection('home-section')"
+                class="inline-flex  border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+                [ngClass]="{ 'bg-blue text-white': activeSection === 'home-section' }">
+                Home
+              </button>
+            </a>
+            <a class="mr-5 text-blue">
+              <button (click)="scrollToSection('about-section')"
+                class="inline-flex   border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+                [ngClass]="{ 'bg-blue text-white': activeSection === 'about-section' }">
+                About
+              </button>
+            </a>
+            <div class="relative mr-5 group">
+              <button
+                class="inline-flex items-center text-blue border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base">
+                Categories
+              </button>
+              <div class="absolute left-0 hidden group-hover:block bg-blue text-black w-48 shadow-lg rounded-md">
+                <ng-container *ngFor="let category of allcategories">
+                  <a class="block px-4 py-2 text-white hover:bg-white hover:text-blue cursor-pointer"
+                    (click)="scrollToCategory(category)">
+                    {{ category.category_name }}
+                  </a>
+                </ng-container>
+              </div>
+            </div>
+            <a class="text-blue">
+              <button (click)="scrollToSection('contact-section')"
+                class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-blue hover:text-white rounded text-base"
+                [ngClass]="{ 'bg-blue text-white': activeSection === 'contact-section' }">
+                Contact
+              </button>
+            </a>
+
+
+            <div class="hidde lg:items-start flex gap-6 border-t-4 border-gray py-2">
+              <ng-container *ngIf="userInfo?.role !== 'renter'; else renterContent">
+                <button
+                  class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray rounded text-white bg-blue"
+                  routerLink="/login">
+                  Login
+                </button>
+                <button
+                  class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-white bg-blue"
+                  routerLink="/termcondition">
+                  Register
+                </button>
+              </ng-container>
+            </div>
+
+            <!-- <div class="flex flex-1 justify-end gap-6" *ngIf="isMobile">
+              <ng-container *ngIf="userInfo?.role !== 'renter'; else renterContent">
+                <button
+                  class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-white bg-blue"
+                  routerLink="/login">
+                  Login
+                </button>
+                <button
+                  class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-white bg-blue"
+                  routerLink="/termcondition">
+                  Register
+                </button>
+              </ng-container>
+            </div> -->
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</header>

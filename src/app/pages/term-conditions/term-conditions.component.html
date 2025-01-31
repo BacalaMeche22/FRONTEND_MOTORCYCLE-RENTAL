@@ -1,0 +1,68 @@
+<body class="bg-gray-100">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-5xl p-6 bg-white border border-gray rounded-lg">
+      <div class="flex flex-col items-center mb-10">
+        <div class="w-20 h-20 bg-gray-200 border rounded-full flex items-center justify-center">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/mobi-pms.appspot.com/o/LOGO%20(2).png?alt=media&token=0ca58c02-3564-48ba-b023-df0f67a54083"
+            alt=""
+            class="w-16 h-16 object-contain">
+        </div>
+        <h1 class="mt-4 text-3xl font-bold text-center">Terms of Agreement</h1>
+      </div>
+
+      <div class="text-gray-700 mb-10">
+        <div class="max-h-60 overflow-y-auto space-y-2">
+          <p class="mb-4">
+            By using our service, you agree to the following terms and conditions. Please read them carefully before proceeding:
+          </p>
+          <ol class="list-decimal list-inside space-y-2">
+            <li>The RENTER agrees to use the rented motorcycle solely for lawful purposes during the term of this Lease.</li>
+            <li>The RENTER shall indemnify and hold the LESSOR harmless from any fines, penalties, or liabilities arising from the violation of any laws or illegal use of the rented motorcycle.</li>
+            <li>The RENTER agrees to return the motorcycle within the agreed rental period. Late returns will be charged a Php 50 per hour fee for up to 3 hours. Any delay exceeding 3 hours shall be considered as an additional day.</li>
+            <li>All rental payments shall be made directly to the LESSOR or a duly authorized representative.</li>
+            <li>The RENTER shall pay the full rental fee upon execution of this agreement. Any extended rental period must be paid upon return of the motorcycle.</li>
+            <li>The RENTER shall not sub-lease or permit the motorcycle to be used by any other person or entity.</li>
+            <li>The LESSOR agrees to provide one motorcycle for each RENTER, and the motorcycle must be used exclusively by the individual executing this agreement. Only one motorcycle shall be rented per individual.</li>
+            <li>The LESSOR shall provide one free helmet per unit. Additional helmets may be rented for Php 150.00 each. Lost or damaged helmets will incur a Php 1,000.00 penalty.</li>
+            <li>The RENTER is responsible for paying for gasoline used during the rental period and must return the motorcycle with the same fuel level as when rented.</li>
+            <li>If the motorcycle is damaged, destroyed, or taken by any judicial or governmental authority, the RENTER remains financially responsible for any costs incurred.</li>
+            <li>The RENTER must make a deposit of Php 500.00 to Php 1,000.00, depending on the unit, upon execution of this agreement. The deposit will be returned, subject to deductions for damages or penalties.</li>
+            <li>A non-refundable reservation fee of Php 500.00 is required for future bookings.</li>
+            <li>The RENTER agrees to maintain the motorcycle in good working condition and must wash and clean the unit before returning it. Failure to do so will incur a penalty of Php 50.00.</li>
+            <li>If the RENTER cannot return the motorcycle personally and requests retrieval, a fee of Php 300.00 will apply within Cagayan de Oro City. Retrieval fees for locations outside the city will be determined based on distance.</li>
+            <li>The RENTER agrees to pay for any extended rental period on the same day through GCash or other money remittance services. Failure to do so within 3 days may result in legal action.</li>
+          </ol>
+          <p class="mt-4">
+            If you do not agree to these terms, you may not use our service.
+          </p>
+        </div>
+      </div>
+      
+
+      <div class="flex flex-col items-center mb-10">
+        <label class="text-center mb-2 text-lg">Do you accept the terms of Agreement?</label>
+        <div class="flex items-center space-x-2">
+          <input type="checkbox" id="accept" class="w-5 h-5" [(ngModel)]="acceptTerms">
+          <label for="accept" class="text-gray-700">Yes, I accept</label>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-x-4 mt-4 md:mt-0">
+        <button 
+          class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base bg-blue  text-white "
+          routerLink=""
+          [disabled]="!acceptTerms">
+          Back to home
+        </button>
+        <button
+        class="inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base"
+        [ngClass]="{'bg-blue text-white': acceptTerms, 'bg-gray-400 text-gray cursor-not-allowed': !acceptTerms}"
+        routerLink="/register"
+        [disabled]="!acceptTerms">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

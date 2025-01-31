@@ -1,0 +1,108 @@
+<div class="flex h-screen bg-gray-100">
+  <div *ngIf="sidebarOpen"
+    class="hidden lg:flex lg:flex-col w-64 bg-blue border-r fixed h-screen transition-all duration-300" id="sidebar">
+    <div>
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/motorcycle-rental-f63ac.appspot.com/o/mr%20log.jpg?alt=media&token=f9d2d5ee-45e8-4b80-acd8-092ef82e648e"
+        alt="Company Logo" class="w-full cursor-pointer" (click)="toggleSidebar()" />
+    </div>
+    <div class="space-y-2 p-3 text-white overflow-y-auto">
+      <ng-container *ngFor="let link of sidebarLinks">
+        <a *ngIf="!link.dropdown" [routerLink]="link.path"
+          class="flex items-center p-2 hover:bg-white hover:text-blue rounded-md"
+          [ngClass]="{'bg-white text-blue': activeLink === link.key}" (click)="setActiveLink(link.key)">
+          <span>{{ link.icon }}</span>
+          <span>{{ link.label }}</span>
+        </a>
+
+        <div *ngIf="link.dropdown">
+          <button class="flex items-center space-x-2 p-2 hover:bg-blue rounded-md" (click)="toggleReportsDropdown()">
+            <span>{{ link.icon }}</span>
+            <span>{{ link.label }}</span>
+            <span class="ml-auto">{{ reportsDropdownOpen ? '▲' : '▼' }}</span>
+          </button>
+          <div *ngIf="reportsDropdownOpen" class="pl-6 space-y-2">
+            <a *ngFor="let child of link.children" [routerLink]="child.path"
+              class="flex items-center p-2 hover:bg-blue rounded-md"
+              [ngClass]="{'bg-blue text-white': activeLink === child.key}" (click)="setActiveLink(child.key)">
+              <span>📁</span>
+              <span>{{ child.label }}</span>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-75 z-40 lg:hidden" *ngIf="sidebarOpen">
+    <div class="flex flex-col w-64 bg-white p-5 h-full">
+      <div class="flex justify-between items-center mb-5">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/mobi-pms.appspot.com/o/LOGO%20(2).png?alt=media&token=0ca58c02-3564-48ba-b023-df0f67a54083"
+          alt="Company Logo" class="h-10" />
+        <button class="text-gray-800" (click)="toggleSidebar()">✖</button>
+      </div>
+      <div class="space-y-2">
+        <a *ngFor="let link of sidebarLinks" [routerLink]="link.path"
+          class="flex items-center p-2 hover:bg-blue hover:text-white rounded-md"
+          [ngClass]="{'bg-blue text-white': activeLink === link.key}"
+          (click)="setActiveLink(link.key); toggleSidebar()">
+          <span>{{ link.icon }}</span>
+          <span>{{ link.label }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="{'lg:ml-64': sidebarOpen, 'ml-0': !sidebarOpen}"
+    class="flex-1 flex flex-col transition-all duration-300">
+    <header
+  class="bg-blue-3 text-white shadow-md fixed top-0 left-0 right-0 z-10 h-16 flex items-center justify-between px-4"
+  [ngClass]="{'lg:ml-64': sidebarOpen, 'ml-0': !sidebarOpen}">
+
+  <div class="flex items-center gap-x-4">
+    <span>Good day! Welcome, {{ userInfo?.first_name }}</span>
+    <div class="relative">
+      <mat-icon class="cursor-pointer" (click)="resetNotificationCount()" [matBadge]="notifNumber">
+        notifications
+      </mat-icon>
+
+      <div *ngIf="showNotification" class="absolute bg-blue-3 p-3 rounded-md text-white top-full mt-2 w-auto text-xs">
+        <table class="w-full table-auto text-sm text-white">
+          <tbody>
+            <tr *ngFor="let msg of m">
+              <td class="px-4 py-2 hover:bg-white hover:text-blue cursor-pointer whitespace-nowrap w-full">
+                {{ msg }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-x-4">
+    <div class="flex items-center gap-x-2">
+      <img class="w-8 h-8 rounded-full" [src]="userInfo?.profile_pic" alt="User Avatar" />
+      <span class="font-medium">Admin</span>
+    </div>
+    <div class="flex items-center gap-x-2 cursor-pointer" (click)="logout()">
+      <img class="w-8 h-8 rounded-full bg-white"
+        src="https://firebasestorage.googleapis.com/v0/b/mobi-pms.appspot.com/o/motors%2Flogout.png?alt=media&token=d07afb44-6c16-4af6-826c-e3243330f10e"
+        alt="Logout Icon" />
+      <span class="font-medium">Logout</span>
+    </div>
+  </div>
+</header>
+
+    <div class="flex-1 pt-20 overflow-y-auto p-5">
+      <header class="text-xl py-3 mb-4 font-bold border-y-2 border-blue">{{ headerTitle }}</header>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <button class="lg:hidden fixed top-4 left-4 z-30 p-3 text-white bg-gray-800" (click)="toggleSidebar()">
+    <span *ngIf="!sidebarOpen">☰</span>
+    <span *ngIf="sidebarOpen">⬅️</span>
+  </button>
+</div>

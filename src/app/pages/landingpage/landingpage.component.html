@@ -1,0 +1,21 @@
+<div class="min-h-screen flex flex-col">
+  <app-header (categorySelected)="onCategorySelected($event)"></app-header>
+
+  <ng-container *ngIf="!showBookingPage && !showPaymentPage && !showConfirmPage && !showViewBookingPage && !showCancelBookingPage && !showBookingHistoryPage && !showRentalPage && !showBookingApprovedPage">
+    <app-home id="home-section"></app-home>
+    <app-get-motorcycle id="get-motorcycle-section" [category]="selectedCategory"></app-get-motorcycle>
+    <app-about id="about-section"></app-about>
+    <app-contact id="contact-section"></app-contact>
+  </ng-container>
+
+  <app-booking-page *ngIf="showBookingPage"></app-booking-page>
+  <app-payment *ngIf="showPaymentPage"></app-payment>
+  <app-confirmation *ngIf="showConfirmPage"></app-confirmation>
+  <app-view-booking *ngIf="showViewBookingPage"></app-view-booking>
+  <app-cancel *ngIf="showCancelBookingPage"></app-cancel>
+  <app-booking-history *ngIf="showBookingHistoryPage"></app-booking-history>
+  <app-rental-table *ngIf="showRentalPage"></app-rental-table>
+  <app-approved-booking *ngIf="showBookingApprovedPage"></app-approved-booking>
+
+  <app-footer *ngIf="!showBookingPage && !showPaymentPage && !showConfirmPage && !showViewBookingPage && !showCancelBookingPage && !showBookingHistoryPage && !showBookingApprovedPage && !showRentalPage"></app-footer>
+</div>

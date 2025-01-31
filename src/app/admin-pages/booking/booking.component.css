@@ -1,0 +1,91 @@
+.table-container {
+  max-height: 500px; 
+  overflow-y: auto;
+  border: 1px solid #e0e0e0; 
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+  padding: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse; 
+  }
+  
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+
+  td, th {
+    width: 25%;
+    padding: 12px 8px; 
+    text-align: left; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+  
+  table, td, th {
+    border: 1px solid #e5e7eb; 
+  }
+  
+  th {
+    background-color: #f3f4f6;
+    font-weight: bold;
+    color: #374151;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9fafb; 
+  }
+  
+  tr:hover {
+    background-color: #e5e7eb;
+    cursor: pointer;
+  }
+  
+  .text-green-500 {
+    color: #22c55e; 
+    font-weight: bold;
+  }
+  
+  .text-red-500 {
+    color: #ef4444; 
+    font-weight: bold;
+  }
+
+
+.demo-inline-calendar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .demo-inline-calendar-card mat-form-field {
+    width: 100%;
+  }
+  
+
+  .date-range-container {
+    overflow: hidden; 
+    transition: height 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+  
+  
+  
+  

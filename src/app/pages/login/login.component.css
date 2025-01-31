@@ -1,0 +1,9 @@
+.custom-spinner circle {
+    stroke: white;
+  }
+
+  .input-invalid {
+    border-color: red !important;  /* Force red border */
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5) !important; /* Optional: Adds shadow effect for better visibility */
+  }
+  

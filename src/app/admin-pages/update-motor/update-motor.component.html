@@ -1,0 +1,87 @@
+<body class="bg-gray-100 p-10">
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white shadow-md rounded-lg p-6 w-10/12 h-5/6 overflow-auto">
+            <h5 class="font-semibold mb-6">Motorcycle Details</h5>
+            <form [formGroup]="motorForm" class="grid grid-cols-2 gap-4">
+                <div class="col-span-2">
+                    <label class="block font-medium">Motorcycle Image</label>
+                    <img *ngIf="motorForm.value.motor_picture" [src]="motorForm.value.motor_picture"
+                        alt="Motorcycle Image" class="w-32 h-32 object-cover mt-2 rounded-md">
+
+                    <div class="flex items-center mt-4">
+                        <label class="block font-medium mr-2">Availability:</label>
+                        <input type="checkbox" formControlName="isVisible" [disabled]="isViewOnly" class="mr-2">
+                        <span>{{ motorForm.get('isVisible')?.value ? 'Available' : 'Not Available' }}</span>
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <label class="block font-medium">Plate Number</label>
+                    <input type="text" formControlName="plate_no" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Model Name</label>
+                    <input type="text" formControlName="model" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Color</label>
+                    <input type="text" formControlName="color" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Cubic Capacity</label>
+                    <input type="text" formControlName="cubic_capacity" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Category</label>
+                    <input type="text" formControlName="category_id" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Price/day</label>
+                    <input type="text" formControlName="price" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div class="col-span-2">
+                    <label class="block font-medium">Description</label>
+                    <textarea formControlName="description" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md"></textarea>
+                </div>
+
+                <div>
+                    <label class="block font-medium">Helmet Price</label>
+                    <input type="text" formControlName="helmet_price" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div>
+                    <label class="block font-medium">Storage Price</label>
+                    <input type="text" formControlName="storage_price" [readonly]="isViewOnly"
+                        class="w-full px-3 py-2 border rounded-md">
+                </div>
+
+                <div class="col-span-2 flex justify-end mb-4 gap-5">
+                    <button *ngIf="!isViewOnly" type="button" (click)="saveChanges()"
+                        class="px-6 py-2 bg-gray text-black rounded-md hover:bg-green">Save</button>
+                    <button type="button" (click)="toggleEditMode()"
+                        class="px-6 py-2 bg-gray text-black rounded-md hover:bg-blue hover:text-white ml-4">
+                        {{ isViewOnly ? 'Edit' : 'Cancel' }}
+                    </button>
+                    <button type="button" (click)="close()"
+                        class="px-6 py-2 bg-blue text-white rounded-md hover:bg-gray">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

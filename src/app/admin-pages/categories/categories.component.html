@@ -1,0 +1,32 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex justify-end mb-2">
+    <button (click)="openAddCategoryDialog()" class="px-2 py-3 mr-4 bg-blue text-white hover:bg-gray text-sm hover:text-white rounded-sm">
+      Add Category
+    </button>
+  </div>
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">Category Name</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let c of allcategories; let i = index">
+        <tr *ngIf="!c.isArchived" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ i + 1 }}</th>
+          <td class="px-6 py-4">{{ c.category_name }}</td>
+          <td class="px-6 flex gap-1 py-4">
+            <button (click)="openUpdateCategorygDialog(c.category_id)" class="font-medium text-blue-600 cursor-pointer" matTooltip="Edit" aria-label="View">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteCategory(c.category_id)"  class="font-medium text-blue-600 cursor-pointer" matTooltip="Archive" aria-label="View">
+              <mat-icon>archive</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

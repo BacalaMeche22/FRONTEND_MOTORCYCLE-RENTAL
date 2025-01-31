@@ -1,0 +1,27 @@
+.text-green {
+    color: green;
+  }
+  
+  .text-red {
+    color: red;
+  }
+  .text-center {
+    text-align: center;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .cancel-button {
+    background-color: #d3d3d3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  

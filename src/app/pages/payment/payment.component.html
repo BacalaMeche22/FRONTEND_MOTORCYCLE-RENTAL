@@ -1,0 +1,201 @@
+<div class="container mx-auto p-6 my-20">
+ 
+  <div>
+    <div class="flex items-center justify-between mb-4 " (click)="back()" >
+      <div class="flex items-center cursor-pointer" >
+        <mat-icon class="text-3xl">keyboard_arrow_left</mat-icon>
+        <span class="text-lg mt-2">Back</span>
+      </div>
+    
+      <header class="text-lg text-center font-extrabold"></header>
+    </div>
+    <form
+      class="grid grid-cols-1 lg:grid-cols-2 gap-6"
+      [formGroup]="paymentform"
+    >
+      <div class="border p-6 rounded-lg">
+        <h4 class="text-lg font-bold mb-4">Selected Period</h4>
+        <p>
+          <strong>Start:</strong> {{ bookingSummary?.pickupDate | date: 'MMMM d, yyyy' }} - 
+          <em class="ml-5">{{ bookingSummary?.pickupTime}}</em>
+        </p>
+        <p>
+          <strong>End:</strong> {{ bookingSummary?.returnDate | date: 'MMMM d, yyyy' }} - 
+          <em class="ml-5">{{ bookingSummary?.returnTime}}</em>
+        </p>
+        <h4 class="text-lg font-bold mt-6 mb-4">Renter Information</h4>
+        <p>
+          <strong>Name:</strong> {{ userInfo?.first_name }} {{ userInfo?.last_name }}
+        </p>
+        <p><strong>Email:</strong> {{ userInfo?.email }}</p>
+        <p><strong>Contact no:</strong> {{ userInfo?.contact_no }}</p>
+        <p><strong>Address:</strong> {{ userInfo?.address }}</p>
+      
+        <div class="border-t mt-4 pt-4">
+          <img
+            [src]="selectedMotor.motor_picture"
+            alt="Motorcycle Image"
+            class="w-full h-auto mb-2"
+          />
+          <h3 class="text-lg font-bold">
+            {{ selectedMotor.motorCategory.category_name }}
+            {{ selectedMotor.model }}
+            {{ selectedMotor.cubic_capacity }}
+          </h3>
+        </div>
+      </div>
+      
+
+      <div class="border p-6 rounded-lg">
+        <h4 class="text-lg font-bold mb-4"></h4>
+
+        <div class="border p-6 rounded-lg">
+          <h3 >Please choose a Payment Options</h3>
+
+       
+            <div class="flex items-center mb-4 border rounded p-4">
+              <input
+                type="radio"
+                id="cash"
+                name="payment_method"
+                class="mr-2"
+                value="cash"
+                checked
+                formControlName="payment_method"
+                (click)="openPickOp()"
+              />
+              <div>
+                <label for="cash" class="font-bold">Pay at the Counter</label>
+                <p class="text-sm text-gray-500">Pay when you pick-up</p>
+              </div>
+            </div>
+          
+            <div class="flex items-center mb-4 border rounded p-4">
+              <input
+                type="radio"
+                id="gcash"
+                name="payment_method"
+                class="mr-2"
+                value="Gcash e-Wallet"
+                formControlName="payment_method"
+                (click)="openGcashModal()"
+              />
+              <div>
+                <label for="gcash" class="font-bold">Pay in Advance</label>
+                <p class="text-sm text-gray-500">Gcash e-Wallet</p>
+              </div>
+            </div>
+
+            <div *ngIf="showGcashReferenceInput" class="mt-4">
+              <input
+                type="text"
+                placeholder="Enter GCash Reference Number"
+                formControlName="reference_link"
+                class="border p-2 rounded w-full"
+              />
+            </div>
+         
+        </div>
+
+  <div *ngIf="selectedPaymentMethod" class="mt-4 border p-6 rounded-lg">
+    <h3>PICK-UP</h3>
+    <p>Please refer to the designated motorcycle pick-up location below:</p>
+    <p class="font-bold">
+      Gusa in Front of CUMC hospital, Cagayan de Oro City, <br />
+      Cagayan de Oro, Philippines, 9000
+    </p>
+  </div>
+
+        <div
+          *ngIf="isGcashModalOpen"
+          class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
+        >
+          <div class="bg-white rounded-lg p-6 max-w-lg w-full">
+            <h2 class="text-lg font-bold mb-4">GCash Payment</h2>
+            <p>Scan the QR code below to pay with GCash:</p>
+            <img
+              [src]="gcashQRCode"
+              alt="GCash QR Code"
+              class="w-48 h-48 mx-auto my-4"
+            />
+
+            <button
+              class="bg-blue text-white py-2 px-4 rounded hover:bg-gray mt-4"
+              (click)="closeGcashModal()"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+
+        <h5 class="text-sm font-bold mb-4">Motorcycle Booking Summary</h5>
+
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span>Pick-up Date:</span>
+            <span>{{ bookingSummary?.pickupDate | date : "MMMM d, y" }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Return Date:</span>
+            <span>{{ bookingSummary?.returnDate | date : "MMMM d, y" }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Days:</span>
+            <span
+              >{{ bookingSummary?.days }} day{{
+                bookingSummary?.days > 1 ? "s" : ""
+              }}</span
+            >
+          </div>
+          <div class="flex justify-between">
+            <span>Motorcycle Price:</span>
+            <span>₱{{ bookingSummary?.motorPrice }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Helmet:</span>
+            <span class="text-green font-bold">Free</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Phone Holder:</span>
+            <span class="text-green font-bold">Free</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Additional Helmet:</span>
+            <span
+              >₱{{ bookingSummary?.helmet ? bookingSummary.helmet : "0" }}</span
+            >
+          </div>
+         
+          <div class="flex justify-between">
+            <span>Extra Storage:</span>
+            <span>₱{{ bookingSummary?.extraStorage }}</span>
+          </div>
+          <div class="border-t pt-2 font-bold flex justify-between mt-4">
+            <span>Total price:</span>
+            <span>₱{{ bookingSummary?.total }}</span>
+          </div>
+
+          
+        </div>
+
+        <div class="flex space-x-4 mt-5">
+          <button
+            class="bg-blue text-white w-full py-2 rounded hover:bg-gray-600 hover:text-white"
+          >
+            Cancel
+          </button>
+        
+          <button
+            (click)="onSubmit()"
+            class="bg-blue text-white w-full py-2 rounded hover:bg-gray-600 hover:text-white"
+          >
+            Book Now
+          </button>
+        
+        </div>
+      </div>
+
+     
+    </form>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+<body class="bg-gray-100 p-10">
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white shadow-md rounded-lg p-6 w-10/12 h-5/6 overflow-auto">
+      <div class="flex justify-between items-center border-b pb-2 mb-4">
+        <h4 class="text-xl font-bold">Rental Details</h4>
+        <button class="text-xl font-bold text-red-500 hover:text-red-700" (click)="close()">X</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 border-b pb-4">
+        <div>
+          <h4 class="font-bold mb-2">Renter Information:</h4>
+          <p>Renter Name: <span class="font-medium">{{ data.user.first_name }} {{ data.user.last_name }}</span></p>
+          <p>Email: <span class="font-medium">{{ data.user.email }}</span></p>
+          <p>Contact no: <span class="font-medium">{{ data.user.contact_no }}</span></p>
+          <p>Address: <span class="font-medium">{{ data.user.address }}</span></p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Motorcycle Information:</h4>
+          <p>Model Name: <span class="font-medium">{{ data.motor.model }}</span></p>
+          <p>Category: <span class="font-medium">{{ data.motor.motorCategory.category_name }}</span></p>
+          <p>Registration No: <span class="font-medium">{{ data.motor.plate_no }}</span></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 border-b py-4">
+        <div>
+          <h4 class="font-bold mb-2">Rental Period:</h4>
+          <p>Rent Start Date&Time: <span class="font-medium">{{ data.pickup_date |  date:'MMMM d, y h:mm a' }}</span>
+          </p>
+          <p>Return Date&Time: <span class="font-medium">{{ data.return_date |  date:'MMMM d, y h:mm a' }} </span></p>
+          <p>Rental Duration: <span class="font-medium">{{ data.days }} days</span></p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-2">Rental Status:</h4>
+          <p>
+            Current Status:
+            <span class="font-medium" [ngClass]="{
+                  'text-green': data.return_status === 'returned',
+                  'text-red': data.return_status !== 'Not Returned'
+                }">
+              {{ data.return_status === 'returned' ? 'Active' : 'Inactive' }}
+            </span>
+          </p>
+
+          <p>
+            Return Status:
+            <span class="font-medium" [ngClass]="{
+                  'text-green': data.return_status === 'returned',
+                  'text-red': data.return_status === 'Not Returned'
+                }">
+              {{ data.return_status }}
+            </span>
+          </p>
+
+        </div>
+      </div>
+
+      <div class="py-4 border-b">
+        <h4 class="font-bold mb-2">Fees and Payment Information:</h4>
+        <p>Subtotal : motor price {{ data.motor.price}} x ({{ data.days }} days for renting): <span
+            class="font-medium">₱ {{ data.days * data.motor.price }}</span></p>
+
+        <p>Helmet: <span class="font-bold text-green"><em>Free</em></span></p>
+        <p *ngIf="data.selectedHelmet && data.motor.helmet_price > 0">
+          Additional Helmet {{ data.motor.helmet_price }} x {{ data.days }} days 
+          <span>₱ {{ (data.days * data.motor.helmet_price) | currency:'PHP' }}</span>
+        </p>
+        
+        <p *ngIf="data.selectedStorage && data.motor.storage_price && data.motor.storage_price > 0">
+          Extra storage {{ data.motor.storage_price }} x {{ data.days }} days 
+          <span>₱ {{ (data.days * data.motor.storage_price) | currency:'PHP' }}</span>
+        </p>
+        
+        
+        <p *ngIf="data.selectedHelmet && data.motor.helmet_price > 0">
+          Additional Helmet {{ data.motor.helmet_price }} x {{ data.days }} days 
+          <span>₱ {{ (data.days * data.motor.helmet_price) | currency:'PHP' }}</span>
+        </p>
+        
+        <p *ngIf="data.selectedStorage && data.motor.storage_price && data.motor.storage_price > 0">
+          Extra storage {{ data.motor.storage_price }} x {{ data.days }} days 
+          <span>₱ {{ (data.days * data.motor.storage_price) | currency:'PHP' }}</span>
+        </p>
+        
+        
+        <p>
+          Penalty
+          <span>₱ {{ data.penalty }}</span>
+        </p>
+
+        <p class="font-bold mt-2">TOTAL AMOUNT:
+          <span class="font-medium text-red-500">₱ {{ overallAmount }}</span>
+        </p>
+
+        <p>
+          Payment Status:
+          <span class="font-medium" [ngClass]="{
+                'text-green': data.paid_status === 'PAID',
+                'text-red': data.paid_status === 'UNPAID'
+              }">
+            {{ data.paid_status }}
+          </span>
+        </p>
+
+        <p>Payment Method: <span
+            class="font-medium">{{ data.paid_status === 'UNPAID' ? '' : data.payment_method }}</span></p>
+
+      </div>
+
+      <div class="flex justify-end mt-4 gap-8">
+
+        <button (click)="openAddPenaltyModal()"
+          class="bg-blue text-white font-medium px-4 py-2 rounded hover:bg-gray hover:text-black">
+          ADD PENALTY
+        </button>
+
+
+        <button (click)="openAddPaymentModal()"
+          class="bg-blue text-white font-medium px-4 py-2 rounded hover:bg-gray hover:text-black">
+          ADD PAYMENT
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

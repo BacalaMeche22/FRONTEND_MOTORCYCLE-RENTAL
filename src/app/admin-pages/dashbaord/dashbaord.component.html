@@ -1,0 +1,50 @@
+<body class="flex flex-col items-center justify-start min-h-screen bg-white pt-10">
+    <div class="container mx-auto px-4">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{totalPending}}</p>
+          <p class="text-2xl">BOOKING PENDING</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{totalRenting}}</p>
+          <p class="text-2xl">TOTAL RENTING</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{totalMotor}}</p>
+          <p class="text-2xl">TOTAL MOTORCYCLE</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+      </div>
+  
+      <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{totalUsers}}</p>
+          <p class="text-2xl">TOTAL ADMIN/USERS</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{allblocklist}}</p>
+          <p class="text-2xl">TOTAL BLOCKLISTED</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+        <div class="border p-8 text-center cursor-pointer hover:bg-blue text-blue hover:text-white transition-all transform hover:scale-105 rounded-lg shadow-xl hover:shadow-2xl">
+          <p class="text-4xl font-bold">{{totalCategory}}</p>
+          <p class="text-2xl">TOTAL CATEGORY</p>
+          <a href="#" class="text-blue-600 text-lg">View Details</a>
+        </div>
+      </div>
+  
+      <div class="grid sm:grid-cols-12 lg:grid-cols-12 gap-6 mt-6">
+        <div class="lg:col-span-8 sm:col-span-12 w-full">
+          <c-chart *ngIf="dataBar" [data]="dataBar" type="bar"></c-chart>
+        </div>
+  
+        <div class="lg:col-span-4 sm:col-span-12 w-full">
+          <c-chart *ngIf="dataDoughnut && dataDoughnut.labels.length > 0" [data]="dataDoughnut" type="doughnut"></c-chart>
+        </div>
+      </div>
+    </div>
+  </body>
+  
